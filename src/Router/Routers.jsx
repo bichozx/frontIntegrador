@@ -21,6 +21,7 @@ import { StudentList } from '../page/studentPage/StudentList';
 import { StudentPage } from '../page/studentPage/StudentPage';
 import { StudentProfile } from '../page/studentPage/StudentProfile';
 import { StudentWelfarePage } from '../page/studentWelfarePage/StudentWelfarePage';
+import { PrivateRoute } from './PrivateRoute/PrivateRoute';
 
 export const Routers = () => {
   return (
@@ -29,7 +30,7 @@ export const Routers = () => {
         <section>
           <Routes>
             <Route path="/" element={<LoguinPage />} />
-            <Route element={<MainLayout />}>
+            <Route element={<PrivateRoute><MainLayout /></PrivateRoute>}>
               <Route path="/dashboard" element={<DashboardPage />} />
               <Route path="/dashboard" element={<DashboardPage />} />
               <Route path="/profile" element={<ProfilePage />} />
@@ -46,8 +47,10 @@ export const Routers = () => {
               <Route path="/create-welfare" element={<StudentWelfarePage/>} />
               <Route path="/welfare-list" element={<ListWelfarePage/>} />
               <Route path="/statistics" element={<StatisticsPage/>} />
+              
 
             </Route>
+            <Route path="/unauthorized" element={<p>No autorizado</p>} />
           </Routes>
         </section>
       </BrowserRouter>

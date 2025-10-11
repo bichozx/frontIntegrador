@@ -6,13 +6,16 @@ import { useNavigate } from 'react-router-dom';
 
 export const HeaderNav = () => {
   const navigate = useNavigate()
-  //   const handleLogout = () => {
-  //   // 🔐 Aquí más adelante conectarás con la API o limpiarás el token del usuario
-  //   console.log("Cerrar sesión");
-  // };
+  
+  const handleLogout = () => {
+    
+    localStorage.removeItem('auth');
+    navigate('/');
+    console.log("Cerrar sesión");
+  };
   return (
-     <nav className="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
-      {/* Sidebar Toggle (Topbar) */}
+    <nav className="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
+     
       <button
         id="sidebarToggleTop"
         className="btn btn-link d-md-none rounded-circle mr-3"
@@ -20,7 +23,7 @@ export const HeaderNav = () => {
         <FaBars />
       </button>
 
-      {/* Topbar Search */}
+      
       <form className="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search">
         <div className="input-group">
           <input
@@ -37,9 +40,9 @@ export const HeaderNav = () => {
         </div>
       </form>
 
-      {/* Topbar Navbar */}
+      
       <ul className="navbar-nav ml-auto">
-        {/* User Information */}
+        
         <li className="nav-item dropdown no-arrow">
           <a
             className="nav-link dropdown-toggle"
@@ -62,7 +65,7 @@ export const HeaderNav = () => {
             />
           </a>
 
-          {/* Dropdown - User Information */}
+          
           <div
             className="dropdown-menu dropdown-menu-right shadow animated--grow-in"
             aria-labelledby="userDropdown"
@@ -75,7 +78,7 @@ export const HeaderNav = () => {
             <button
               type="button"
               className="dropdown-item"
-              onClick={() => navigate("/")}
+              onClick={handleLogout} // () => navigate("/")
             >
               <FaSignOutAlt className="fa-sm fa-fw mr-2 text-gray-400" />
               Cerrar Sesión

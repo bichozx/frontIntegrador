@@ -33,8 +33,8 @@ export const FamilyPage = () => {
     e.preventDefault();
     console.log('Datos del familiar:', formData);
 
-    // Aquí luego se reemplazará por un POST a la API
-    // fetch('/api/familiares', { method: 'POST', body: JSON.stringify(formData) })
+    // POST a la API
+    
     alert('Familiar creado exitosamente ✅ (modo estático)');
   };
 

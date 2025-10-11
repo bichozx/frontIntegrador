@@ -14,11 +14,14 @@ const LoguinPage = () => {
   e.preventDefault();
 
   if (usuario === 'admin' && password === '1234') {
-    alert('Inicio de sesión exitoso');
-    navigate ('/dashboard'); // o usa navigate('/home');
+  localStorage.setItem('auth', 'true'); 
+  alert('Inicio de sesión exitoso');
+  navigate('/dashboard'); 
   } else {
     alert('Usuario o contraseña incorrectos');
   }
+
+  
 };
 
   return (
