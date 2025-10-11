@@ -15,7 +15,7 @@ const LoguinPage = () => {
 
   if (usuario === 'admin' && password === '1234') {
     alert('Inicio de sesión exitoso');
-    navigate ('/home'); // o usa navigate('/home');
+    navigate ('/dashboard'); // o usa navigate('/home');
   } else {
     alert('Usuario o contraseña incorrectos');
   }

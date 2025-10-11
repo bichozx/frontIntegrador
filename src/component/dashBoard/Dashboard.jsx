@@ -4,7 +4,7 @@ import React from 'react';
 export const Dashboard = () => {
   return (
     <div className="container-fluid py-4">
-      {/* Título principal */}
+      
       <div className="d-sm-flex align-items-center justify-content-between mb-4">
         <h1 className="h3 mb-0 text-gray-800">Panel de Control</h1>
         <button
@@ -15,9 +15,9 @@ export const Dashboard = () => {
         </button>
       </div>
 
-      {/* Tarjetas resumen */}
+      
       <div className="row g-4">
-        {/* Total Estudiantes */}
+        
         <div className="col-xl-3 col-md-6">
           <div className="card border-left-primary shadow h-100 py-2">
             <div className="card-body">
@@ -38,7 +38,7 @@ export const Dashboard = () => {
           </div>
         </div>
 
-        {/* Asistencia Mensual */}
+        
         <div className="col-xl-3 col-md-6">
           <div className="card border-left-success shadow h-100 py-2">
             <div className="card-body">
@@ -59,7 +59,7 @@ export const Dashboard = () => {
           </div>
         </div>
 
-        {/* Rendimiento */}
+       
         <div className="col-xl-3 col-md-6">
           <div className="card border-left-info shadow h-100 py-2">
             <div className="card-body">
@@ -96,7 +96,7 @@ export const Dashboard = () => {
           </div>
         </div>
 
-        {/* Pendientes */}
+       
         <div className="col-xl-3 col-md-6">
           <div className="card border-left-warning shadow h-100 py-2">
             <div className="card-body">
@@ -118,7 +118,7 @@ export const Dashboard = () => {
         </div>
       </div>
 
-      {/* Sección de gráficos */}
+     
       <div className="mt-4">
         <ChartsSection />
       </div>

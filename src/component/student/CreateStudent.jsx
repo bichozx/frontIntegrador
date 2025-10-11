@@ -8,7 +8,7 @@ export const CreateStudent = ({
 }) => {
    return (
     <div className="container-fluid">
-      {/* Encabezado */}
+      
       <div className="d-sm-flex align-items-center justify-content-between mb-4">
         <h1 className="h3 mb-0 text-gray-800">Crear Estudiante</h1>
         <Link
@@ -19,7 +19,7 @@ export const CreateStudent = ({
         </Link>
       </div>
 
-      {/* Formulario */}
+      
       <div className="row">
         <div className="col-lg-8">
           <form onSubmit={handleSubmit}>
@@ -53,7 +53,7 @@ export const CreateStudent = ({
               </div>
             </div>
 
-            {/* Email */}
+            
             <div className="form-group">
               <label htmlFor="email" className="form-label">
                 Email
@@ -68,7 +68,7 @@ export const CreateStudent = ({
               />
             </div>
 
-            {/* Celular */}
+            
             <div className="form-group">
               <label htmlFor="celular" className="form-label">
                 Celular
@@ -83,7 +83,7 @@ export const CreateStudent = ({
               />
             </div>
 
-            {/* Grado */}
+            
             <div className="form-group">
               <label htmlFor="grado" className="form-label">
                 Grado
@@ -110,7 +110,7 @@ export const CreateStudent = ({
               </select>
             </div>
 
-            {/* Direcciones */}
+            
             <div className="form-group row">
               <div className="col-sm-6 mb-3 mb-sm-0">
                 <label htmlFor="direccionPrincipal" className="form-label">
@@ -139,7 +139,7 @@ export const CreateStudent = ({
               </div>
             </div>
 
-            {/* Información Académica */}
+            
             <div className="form-group">
               <label htmlFor="infoAcademica" className="form-label">
                 Información Académica
@@ -153,7 +153,7 @@ export const CreateStudent = ({
               ></textarea>
             </div>
 
-            {/* Botones */}
+            
             <button type="submit" className="btn btn-primary btn-block mb-3">
               Crear Estudiante
             </button>

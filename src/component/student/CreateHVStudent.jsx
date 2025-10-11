@@ -8,7 +8,7 @@ export const CreateHVStudent = ({
 }) => {
   return (
     <div className="container-fluid">
-      {/* Encabezado */}
+      
       <div className="d-sm-flex align-items-center justify-content-between mb-4">
         <h1 className="h3 mb-0 text-gray-800">Crear HV Estudiantil</h1>
         <Link
@@ -19,11 +19,11 @@ export const CreateHVStudent = ({
         </Link>
       </div>
 
-      {/* Formulario */}
+      
       <div className="row">
         <div className="col-12 col-md-8">
           <form id="form-historial" onSubmit={handleSubmit}>
-            {/* Estudiante */}
+            
             <div className="form-group mb-3">
               <label className="form-label" htmlFor="estudiante">
                 Estudiante
@@ -41,7 +41,7 @@ export const CreateHVStudent = ({
               </select>
             </div>
 
-            {/* Institución Anterior */}
+            
             <div className="form-group mb-3">
               <label className="form-label" htmlFor="institucionAnterior">
                 Institución Anterior
@@ -56,7 +56,7 @@ export const CreateHVStudent = ({
               />
             </div>
 
-            {/* Año y Promedio */}
+            
             <div className="form-group row">
               <div className="col-sm-6 mb-3 mb-sm-0">
                 <label className="form-label" htmlFor="anioGraduacion">
@@ -91,7 +91,7 @@ export const CreateHVStudent = ({
               </div>
             </div>
 
-            {/* Conducta */}
+            
             <div className="form-group mb-3">
               <label className="form-label" htmlFor="conductaAnterior">
                 Conducta Anterior
@@ -111,7 +111,7 @@ export const CreateHVStudent = ({
               </select>
             </div>
 
-            {/* Logros */}
+            
             <div className="form-group mb-3">
               <label className="form-label" htmlFor="logros">
                 Logros y Reconocimientos
@@ -126,7 +126,7 @@ export const CreateHVStudent = ({
               ></textarea>
             </div>
 
-            {/* Actividades */}
+            
             <div className="form-group mb-3">
               <label className="form-label" htmlFor="actividades">
                 Actividades Extracurriculares
@@ -141,7 +141,7 @@ export const CreateHVStudent = ({
               ></textarea>
             </div>
 
-            {/* Observaciones */}
+            
             <div className="form-group mb-4">
               <label className="form-label" htmlFor="observaciones">
                 Observaciones
@@ -156,7 +156,7 @@ export const CreateHVStudent = ({
               ></textarea>
             </div>
 
-            {/* Botones */}
+            
             <div className="d-flex gap-3">
               <button type="submit" className="btn btn-primary w-50">
                 <i className="fas fa-save me-2"></i> Crear HV

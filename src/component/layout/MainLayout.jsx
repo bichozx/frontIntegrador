@@ -1,4 +1,5 @@
 import { Footer } from "./Footer";
+import { HeaderNav } from './HeaderNav';
 import { MenuSideBar } from "./MenuSideBar";
 import { Outlet } from "react-router-dom";
 import React from "react";
@@ -11,6 +12,7 @@ export const MainLayout = () => {
 
       {/* Contenedor principal */}
       <div className="d-flex flex-column flex-grow-1 bg-light">
+      <HeaderNav/>
         {/* Contenido dinámico */}
         <main className="flex-grow-1 p-4">
           <Outlet />

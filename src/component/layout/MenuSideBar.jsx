@@ -10,7 +10,7 @@ export const MenuSideBar = () => {
       {/* Brand */}
       <Link
         className="sidebar-brand d-flex align-items-center justify-content-center"
-        to="/"
+        to="/dashboard"
       >
         <div className="sidebar-brand-icon rotate-n-15">
           <i className="fas fa-graduation-cap"></i>
@@ -22,7 +22,7 @@ export const MenuSideBar = () => {
 
       {/* Dashboard */}
       <li className="nav-item">
-        <Link className="nav-link" to="/">
+        <Link className="nav-link" to="dashboard">
           <i className="fas fa-fw fa-tachometer-alt"></i>
           <span>Dashboard</span>
         </Link>
@@ -98,10 +98,10 @@ export const MenuSideBar = () => {
         <div id="collapseFamiliar" className="collapse" data-bs-parent="#accordionSidebar">
           <div className="bg-white py-2 collapse-inner rounded">
             
-            <Link className="collapse-item" to="/familiares">
+            <Link className="collapse-item" to="/family-list">
               Ver Familiares
             </Link>
-            <Link className="collapse-item" to="/crear-familiar">
+            <Link className="collapse-item" to="/create-family">
               Crear Familiar
             </Link>
           </div>
@@ -123,10 +123,10 @@ export const MenuSideBar = () => {
         <div id="collapseNotas" className="collapse" data-bs-parent="#accordionSidebar">
           <div className="bg-white py-2 collapse-inner rounded">
             
-            <Link className="collapse-item" to="/notas">
+            <Link className="collapse-item" to="/note-list">
               Ver Notas
             </Link>
-            <Link className="collapse-item" to="/crear-nota">
+            <Link className="collapse-item" to="/create-note">
               Registrar Nota
             </Link>
           </div>
@@ -148,10 +148,10 @@ export const MenuSideBar = () => {
         <div id="collapseAsistencias" className="collapse" data-bs-parent="#accordionSidebar">
           <div className="bg-white py-2 collapse-inner rounded">
             
-            <Link className="collapse-item" to="/asistencias">
+            <Link className="collapse-item" to="/assistance-list">
               Ver Asistencias
             </Link>
-            <Link className="collapse-item" to="/crear-asistencia">
+            <Link className="collapse-item" to="/create-assistance">
               Registrar Asistencia
             </Link>
           </div>
@@ -173,10 +173,10 @@ export const MenuSideBar = () => {
         <div id="collapseBienestar" className="collapse" data-bs-parent="#accordionSidebar">
           <div className="bg-white py-2 collapse-inner rounded">
             
-            <Link className="collapse-item" to="/bienestar">
+            <Link className="collapse-item" to="/welfare-list">
               Ver Registros
             </Link>
-            <Link className="collapse-item" to="/crear-bienestar">
+            <Link className="collapse-item" to="/create-welfare">
               Crear Registro
             </Link>
           </div>
@@ -198,7 +198,7 @@ export const MenuSideBar = () => {
         <div id="collapseEstadisticas" className="collapse" data-bs-parent="#accordionSidebar">
           <div className="bg-white py-2 collapse-inner rounded">
             
-            <Link className="collapse-item" to="/estadisticas">
+            <Link className="collapse-item" to="/statistics">
               Ver Reportes
             </Link>
           </div>

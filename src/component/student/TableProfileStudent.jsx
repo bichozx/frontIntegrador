@@ -11,7 +11,7 @@ export const TableProfileStudent = ({
 }) => {
    return (
     <div className="container-fluid">
-      {/* Encabezado */}
+      
       <div className="d-sm-flex align-items-center justify-content-between mb-4">
         <h1 className="h3 mb-0 text-gray-800">Listado de HV Estudiantil</h1>
         <Link to="/create-profile" className="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm">
@@ -20,7 +20,7 @@ export const TableProfileStudent = ({
         </Link>
       </div>
 
-      {/* Buscador */}
+    
       <div className="input-group mb-3 rounded-pill overflow-hidden border w-50">
         <span className="input-group-text bg-white border-0 pe-1">
           <i className="bi bi-search"></i>
@@ -34,7 +34,7 @@ export const TableProfileStudent = ({
         />
       </div>
 
-      {/* Tabla */}
+      
       <table className="table align-middle mb-0 bg-white shadow-sm rounded">
         <thead className="bg-light">
           <tr>
@@ -99,7 +99,7 @@ export const TableProfileStudent = ({
         </tbody>
       </table>
 
-      {/* Paginación */}
+      
       <nav aria-label="Page navigation example" className="mt-4">
         <ul className="pagination">
           <li className="page-item">
