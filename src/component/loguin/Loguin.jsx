@@ -18,10 +18,10 @@ export const Loguin = ({
             <div className="card o-hidden border-0 shadow-lg">
               <div className="card-body p-0">
                 <div className="row">
-                  {/* Imagen lateral */}
+                  
                   <div className="col-lg-6 d-none d-lg-block bg-login-image"></div>
 
-                  {/* Formulario */}
+                  
                   <div className="col-lg-6">
                     <div className="p-5">
                       <div className="text-center mb-4">
@@ -34,7 +34,7 @@ export const Loguin = ({
                       </div>
 
                       <form className="user" onSubmit={handleLogin}>
-                        {/* Usuario */}
+                       
                         <div className="form-group mb-3">
                           <input
                             type="text"
@@ -47,7 +47,7 @@ export const Loguin = ({
                           />
                         </div>
 
-                        {/* Contraseña */}
+                        
                         <div className="form-group mb-3">
                           <input
                             type="password"
@@ -60,7 +60,7 @@ export const Loguin = ({
                           />
                         </div>
 
-                        {/* Recordarme */}
+                        
                         <div className="form-group mb-3 d-flex align-items-center">
                           <input
                             type="checkbox"
@@ -77,7 +77,7 @@ export const Loguin = ({
                           </label>
                         </div>
 
-                        {/* Botón principal */}
+                        
                         <button
                           type="submit"
                           className="btn btn-primary btn-user btn-block"
@@ -87,7 +87,7 @@ export const Loguin = ({
 
                         <hr />
 
-                        {/* Login con redes */}
+                       
                         <button
                           type="button"
                           className="btn btn-google btn-user btn-block"
@@ -107,7 +107,7 @@ export const Loguin = ({
 
                       <hr />
 
-                      {/* Enlaces inferiores */}
+                      
                       <div className="text-center">
                         <a className="small text-decoration-none" href="#">
                           ¿Olvidaste tu contraseña?

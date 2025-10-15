@@ -25,6 +25,7 @@ import { StudentList } from '../page/studentPage/StudentList';
 import { StudentPage } from '../page/studentPage/StudentPage';
 import { StudentProfile } from '../page/studentPage/StudentProfile';
 import { StudentWelfarePage } from '../page/studentWelfarePage/StudentWelfarePage';
+import { PrivateRoute } from './PrivateRoute/PrivateRoute';
 
 export const Routers = () => {
   return (
@@ -33,6 +34,7 @@ export const Routers = () => {
         <section>
           <Routes>
             <Route path="/" element={<LoguinPage />} />
+<<<<<<< HEAD
             <Route
               element={
                 <PrivateRoute>
@@ -40,6 +42,9 @@ export const Routers = () => {
                 </PrivateRoute>
               }
             >
+=======
+            <Route element={<PrivateRoute><MainLayout /></PrivateRoute>}>
+>>>>>>> 52137e5824d9528d0b57de523f00a5a3d0c80900
               <Route path="/dashboard" element={<DashboardPage />} />
               <Route path="/dashboard" element={<DashboardPage />} />
               <Route path="/profile" element={<Profile />} />
@@ -47,6 +52,7 @@ export const Routers = () => {
               <Route path="/create-student" element={<StudentPage />} />
               <Route path="/student-list" element={<StudentList />} />
               <Route path="/create-profile" element={<StudentProfile />} />
+<<<<<<< HEAD
               <Route path="/profile-list" element={<ProfileListStudent />} />
               <Route path="/create-family" element={<FamilyPage />} />
               <Route path="/family-list" element={<ListFamilyPage />} />
@@ -62,6 +68,22 @@ export const Routers = () => {
               <Route path="/statistics" element={<StatisticsPage />} />
             </Route>
             
+=======
+              <Route path="/profile-list" element={<ProfileListStudent/>} />
+              <Route path="/create-family" element={<FamilyPage/>} />
+              <Route path="/family-list" element={<ListFamilyPage/>} />
+              <Route path="/create-note" element={<RegisterNotePage/>} />
+              <Route path="/note-list" element={<NoteList/>} />
+              <Route path="/create-assistance" element={<RegisterAttendancePage/>} />
+              <Route path="/assistance-list" element={<ListAssistancePage/>} />
+              <Route path="/create-welfare" element={<StudentWelfarePage/>} />
+              <Route path="/welfare-list" element={<ListWelfarePage/>} />
+              <Route path="/statistics" element={<StatisticsPage/>} />
+              
+
+            </Route>
+            <Route path="/unauthorized" element={<p>No autorizado</p>} />
+>>>>>>> 52137e5824d9528d0b57de523f00a5a3d0c80900
           </Routes>
           {/* <GlobalLoader/> */}
         </section>

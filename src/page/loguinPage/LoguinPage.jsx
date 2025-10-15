@@ -10,7 +10,7 @@ const LoguinPage = () => {
   const [password, setPassword] = useState('');
   const [rememberMe, setRememberMe] = useState(false);
 
-  const { loginService, loading, error } = useAuthStore();
+  const {  loading, error } = useAuthStore();
  
 
   const navigate = useNavigate();
@@ -18,31 +18,13 @@ const LoguinPage = () => {
   const handleLogin = async (e) => {
     e.preventDefault();
 
-    try {
-      await loginService(usuario, password);
-      navigate('/dashboard');
-    } catch {
-      alert('Correo o contraseña incorrectos');
-    }
-
-    // try {
-    //   const data = await authService(usuario, password);
-    //   console.log("✅ Login exitoso:", data);
-
-    //   setToken(data.token);
-    //   setRol(data.rol);
-    //   setUsuario(data.usuario);
-
-    //   // Guardar el token para sesiones persistentes
-    //   if (rememberMe) localStorage.setItem("token", data.token);
-
-    //   navigate("/dashboard");
-    // } catch (err) {
-    //   alert(err.message || "Correo o contraseña incorrectos");
-    // } finally {
-    //   setLoading(false);
-    // }
-  };
+  if (usuario === 'admin' && password === '1234') {
+    alert('Inicio de sesión exitoso');
+    navigate ('/dashboard'); // o usa navigate('/home');
+  } else {
+    alert('Usuario o contraseña incorrectos');
+  }
+};
 
   return (
     <div>
