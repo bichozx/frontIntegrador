@@ -1,36 +1,72 @@
-import React, { useState } from 'react'
+import React, { useState } from "react";
 
-import { CreateStudent } from '../../component/student/CreateStudent'
+import { CreateStudent } from "../../component/student/CreateStudent";
+import { useStudentStore } from "../../store/useStudentStore";
 
 export const StudentPage = () => {
-    const [formData, setFormData] = useState({
-    nombre: "",
-    apellido: "",
-    email: "",
-    celular: "",
-    grado: "",
-    direccionPrincipal: "",
-    direccionSecundaria: "",
-    infoAcademica: "",
+  const { makeStudent, loading, error, success } = useStudentStore();
+
+  const [formData, setFormData] = useState({
+    programa: "",
+    semestre: "",
+    promedio: "",
+    fechaNacimiento: "",
+    usuario: {
+      nombre: "",
+      correo: "",
+      password: "",
+      rol: "Estudiante",
+      estado: "Activo",
+    },
   });
 
-    const handleChange = (e) => {
-    const { id, value } = e.target;
-    setFormData({ ...formData, [id]: value });
+  const handleChange = (e) => {
+    const { id, value, name } = e.target;
+
+    if (name?.startsWith("usuario.")) {
+      const field = name.split(".")[1];
+      setFormData({
+        ...formData,
+        usuario: { ...formData.usuario, [field]: value },
+      });
+    } else {
+      setFormData({ ...formData, [id]: value });
+    }
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log("Estudiante creado:", formData);
-    // Aquí puedes agregar la llamada al backend
+    const created = await makeStudent(formData);
+
+    if (created) {
+      // ✅ Limpiar el formulario si se creó con éxito
+      setFormData({
+        programa: "",
+        semestre: "",
+        promedio: "",
+        fechaNacimiento: "",
+        usuario: {
+          nombre: "",
+          correo: "",
+          password: "",
+          rol: "Estudiante",
+          estado: "Activo",
+        },
+      });
+
+      // Opcional: alerta Bootstrap
+      alert("✅ Estudiante creado exitosamente");
+    }
   };
+
   return (
-    <>
-      <CreateStudent
-        formData={formData}
-        handleChange={handleChange}
-        handleSubmit={handleSubmit}
-      />
-    </>
-  )
-}
+    <CreateStudent
+      formData={formData}
+      loading={loading}
+      error={error}
+      success={success}
+      handleChange={handleChange}
+      handleSubmit={handleSubmit}
+    />
+  );
+};

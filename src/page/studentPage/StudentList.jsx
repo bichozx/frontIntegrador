@@ -1,48 +1,86 @@
-import React, { useState } from 'react';
+// src/pages/student/StudentList.jsx
+import React, { useEffect, useState } from "react";
 
-import { TableStudent } from '../../component/student/TableStudent';
+import { EditStudentModal } from "../../component/student/EditStudentModal";
+import { TableStudent } from "../../component/student/TableStudent";
+import { useNavigate } from 'react-router-dom';
+import { useStudentStore } from "../../store/useStudentStore";
 
 export const StudentList = () => {
-   const [students] = useState([
-    {
-      id: 1,
-      nombre: "Alan",
-      apellido: "Brito",
-      email: "alanbrito@gmail.com",
-      celular: "323399999",
-      direccion: "Calle ciega 123",
-      grado: "10°",
-    },
-    {
-      id: 2,
-      nombre: "Zoyla",
-      apellido: "Vaca",
-      email: "zoylavaca@gmail.com",
-      celular: "322131444",
-      direccion: "Cra no se meta 12",
-      grado: "11°",
-    },
-  ]);
+   const {
+    students,
+    fetchStudents,
+    updateStudent,
+    deleteStudent,
+    loading,
+    error,
+    setSelectedId, // 👈 función del store
+  } = useStudentStore();
+  
+  const [selectedStudent, setSelectedStudent] = useState(null);
+  const [showModal, setShowModal] = useState(false);
 
-  const handleEdit = (id) => {
-    console.log("Editar estudiante:", id);
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    fetchStudents();
+  }, [fetchStudents]);
+
+  const handleEdit = (student) => {
+    setSelectedStudent(student);
+    setShowModal(true);
   };
 
-  const handleDelete = (id) => {
-    console.log("Eliminar estudiante:", id);
+  const handleCloseModal = () => {
+    setSelectedStudent(null);
+    setShowModal(false);
   };
 
-  const handleView = (id) => {
-    console.log("Ver estudiante:", id);
+  const handleSave = async (id, updatedData) => {
+    const ok = await updateStudent(id, updatedData);
+    if (ok) {
+      alert("✅ Estudiante actualizado con éxito");
+      handleCloseModal();
+      fetchStudents(); // 🔁 refresca lista
+    }
   };
+
+  const handleView = (student) => {
+    
+    // Aquí pones la ruta a la que quieres ir
+     setSelectedId(student.id); 
+     
+    navigate('/profile-student');
+  };
+
+    const handleDelete = async (id) => {
+    const confirmed = window.confirm("¿Estás seguro de eliminar este estudiante?");
+    if (!confirmed) return;
+
+    const ok = await deleteStudent(id);
+    if (ok) alert("🗑️ Estudiante eliminado correctamente");
+    fetchStudents();
+  };
+
+  if (loading) return <div className="text-center mt-4">Cargando estudiantes...</div>;
+  if (error) return <div className="text-center text-danger mt-4">{error}</div>;
+
   return (
     <>
-      <TableStudent 
+      <TableStudent
         students={students}
         handleEdit={handleEdit}
         handleDelete={handleDelete}
         handleView={handleView}
       />
+
+      {showModal && selectedStudent && (
+        <EditStudentModal
+          student={selectedStudent}
+          onClose={handleCloseModal}
+          onSave={handleSave}
+        />
+      )}
     </>
   );
 };

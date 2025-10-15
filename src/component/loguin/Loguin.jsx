@@ -28,7 +28,9 @@ export const Loguin = ({
                         <h1 className="h4 text-gray-900 font-weight-bold">
                           ¡Bienvenido de nuevo!
                         </h1>
-                        <p className="text-muted">Inicia sesión para continuar</p>
+                        <p className="text-muted">
+                          Inicia sesión para continuar
+                        </p>
                       </div>
 
                       <form className="user" onSubmit={handleLogin}>
@@ -90,14 +92,16 @@ export const Loguin = ({
                           type="button"
                           className="btn btn-google btn-user btn-block"
                         >
-                          <i className="fab fa-google fa-fw"></i> Iniciar con Google
+                          <i className="fab fa-google fa-fw"></i> Iniciar con
+                          Google
                         </button>
 
                         <button
                           type="button"
                           className="btn btn-facebook btn-user btn-block"
                         >
-                          <i className="fab fa-facebook-f fa-fw"></i> Iniciar con Facebook
+                          <i className="fab fa-facebook-f fa-fw"></i> Iniciar
+                          con Facebook
                         </button>
                       </form>
 
@@ -121,7 +125,7 @@ export const Loguin = ({
             </div>
           </div>
         </div>
-      </div> 
+      </div>
     </div>
   );
 };

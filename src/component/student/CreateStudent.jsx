@@ -1,14 +1,28 @@
-import { Link } from 'react-router-dom';
-import React from 'react'
+import React, { useEffect, useState } from "react";
+
+import { Link } from "react-router-dom";
 
 export const CreateStudent = ({
   formData,
-  handleChange, 
-  handleSubmit
+  handleChange,
+  handleSubmit,
+  loading,
+  error,
+  success,
 }) => {
-   return (
+  const [showAlert, setShowAlert] = useState(false);
+
+  // 👇 Mostrar la alerta y luego ocultarla automáticamente
+  useEffect(() => {
+    if (success || error) {
+      setShowAlert(true);
+      const timer = setTimeout(() => setShowAlert(false), 3000); // se oculta en 3s
+      return () => clearTimeout(timer);
+    }
+  }, [success, error]);
+
+  return (
     <div className="container-fluid">
-      
       <div className="d-sm-flex align-items-center justify-content-between mb-4">
         <h1 className="h3 mb-0 text-gray-800">Crear Estudiante</h1>
         <Link
@@ -19,153 +33,152 @@ export const CreateStudent = ({
         </Link>
       </div>
 
-      
       <div className="row">
         <div className="col-lg-8">
+          {/* ✅ ALERTA Bootstrap 5 animada */}
+          {showAlert && (
+            <div
+              className={`alert ${
+                success ? "alert-success" : "alert-danger"
+              } alert-dismissible fade show`}
+              role="alert"
+            >
+              {success
+                ? "✅ Estudiante creado exitosamente."
+                : `❌ ${error || "Ocurrió un error al crear el estudiante."}`}
+              <button
+                type="button"
+                className="btn-close"
+                onClick={() => setShowAlert(false)}
+              ></button>
+            </div>
+          )}
+
           <form onSubmit={handleSubmit}>
-            {/* Nombre y Apellido */}
-            <div className="form-group row">
-              <div className="col-sm-6 mb-3 mb-sm-0">
-                <label htmlFor="nombre" className="form-label">
-                  Nombre
-                </label>
-                <input
-                  type="text"
-                  id="nombre"
-                  className="form-control"
-                  value={formData.nombre}
-                  onChange={handleChange}
-                  required
-                />
-              </div>
-              <div className="col-sm-6">
-                <label htmlFor="apellido" className="form-label">
-                  Apellido
-                </label>
-                <input
-                  type="text"
-                  id="apellido"
-                  className="form-control"
-                  value={formData.apellido}
-                  onChange={handleChange}
-                  required
-                />
-              </div>
+            {/* Programa */}
+            <div className="form-group">
+              <label htmlFor="programa" className="form-label">
+                Programa
+              </label>
+              <input
+                type="text"
+                id="programa"
+                className="form-control"
+                value={formData.programa}
+                onChange={handleChange}
+                required
+              />
             </div>
 
-            
+            {/* Semestre */}
             <div className="form-group">
-              <label htmlFor="email" className="form-label">
-                Email
+              <label htmlFor="semestre" className="form-label">
+                Semestre
               </label>
+              <input
+                type="number"
+                id="semestre"
+                className="form-control"
+                value={formData.semestre}
+                onChange={handleChange}
+                required
+              />
+            </div>
+
+            {/* Promedio */}
+            <div className="form-group">
+              <label htmlFor="promedio" className="form-label">
+                Promedio
+              </label>
+              <input
+                type="number"
+                id="promedio"
+                className="form-control"
+                value={formData.promedio}
+                onChange={handleChange}
+                step="0.1"
+                required
+              />
+            </div>
+
+            {/* Fecha Nacimiento */}
+            <div className="form-group">
+              <label htmlFor="fechaNacimiento" className="form-label">
+                Fecha de Nacimiento
+              </label>
+              <input
+                type="date"
+                id="fechaNacimiento"
+                className="form-control"
+                value={formData.fechaNacimiento}
+                onChange={handleChange}
+                required
+              />
+            </div>
+
+            <hr />
+
+            {/* Datos del usuario */}
+            <h5>Datos del Usuario</h5>
+
+            <div className="form-group">
+              <label className="form-label">Nombre</label>
+              <input
+                type="text"
+                name="usuario.nombre"
+                className="form-control"
+                value={formData.usuario.nombre}
+                onChange={handleChange}
+                required
+              />
+            </div>
+
+            <div className="form-group">
+              <label className="form-label">Correo</label>
               <input
                 type="email"
-                id="email"
+                name="usuario.correo"
                 className="form-control"
-                value={formData.email}
+                value={formData.usuario.correo}
                 onChange={handleChange}
                 required
               />
             </div>
 
-            
             <div className="form-group">
-              <label htmlFor="celular" className="form-label">
-                Celular
-              </label>
+              <label className="form-label">Contraseña</label>
               <input
-                type="tel"
-                id="celular"
+                type="password"
+                name="usuario.password"
                 className="form-control"
-                value={formData.celular}
+                value={formData.usuario.password}
                 onChange={handleChange}
                 required
               />
             </div>
 
-            
-            <div className="form-group">
-              <label htmlFor="grado" className="form-label">
-                Grado
-              </label>
-              <select
-                id="grado"
-                className="form-control"
-                value={formData.grado}
-                onChange={handleChange}
-                required
-              >
-                <option value="">Seleccionar Grado</option>
-                <option value="1°">1° Primaria</option>
-                <option value="2°">2° Primaria</option>
-                <option value="3°">3° Primaria</option>
-                <option value="4°">4° Primaria</option>
-                <option value="5°">5° Primaria</option>
-                <option value="6°">6° Primaria</option>
-                <option value="7°">7° Secundaria</option>
-                <option value="8°">8° Secundaria</option>
-                <option value="9°">9° Secundaria</option>
-                <option value="10°">10° Secundaria</option>
-                <option value="11°">11° Secundaria</option>
-              </select>
-            </div>
-
-            
-            <div className="form-group row">
-              <div className="col-sm-6 mb-3 mb-sm-0">
-                <label htmlFor="direccionPrincipal" className="form-label">
-                  Dirección Principal
-                </label>
-                <input
-                  type="text"
-                  id="direccionPrincipal"
-                  className="form-control"
-                  value={formData.direccionPrincipal}
-                  onChange={handleChange}
-                  required
-                />
-              </div>
-              <div className="col-sm-6">
-                <label htmlFor="direccionSecundaria" className="form-label">
-                  Dirección Secundaria
-                </label>
-                <input
-                  type="text"
-                  id="direccionSecundaria"
-                  className="form-control"
-                  value={formData.direccionSecundaria}
-                  onChange={handleChange}
-                />
-              </div>
-            </div>
-
-            
-            <div className="form-group">
-              <label htmlFor="infoAcademica" className="form-label">
-                Información Académica
-              </label>
-              <textarea
-                id="infoAcademica"
-                className="form-control"
-                rows="4"
-                value={formData.infoAcademica}
-                onChange={handleChange}
-              ></textarea>
-            </div>
-
-            
-            <button type="submit" className="btn btn-primary btn-block mb-3">
-              Crear Estudiante
-            </button>
+            {/* Botón de envío */}
             <button
-              type="button"
-              className="btn btn-success btn-block mb-4 d-none"
+              type="submit"
+              className="btn btn-primary btn-block mt-3"
+              disabled={loading}
             >
-              Actualizar Estudiante
+              {loading ? (
+                <>
+                  <span
+                    className="spinner-border spinner-border-sm me-2"
+                    role="status"
+                    aria-hidden="true"
+                  ></span>
+                  Creando...
+                </>
+              ) : (
+                "Crear Estudiante"
+              )}
             </button>
           </form>
         </div>
       </div>
     </div>
   );
-}
+};

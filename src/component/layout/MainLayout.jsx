@@ -1,4 +1,5 @@
 import { Footer } from "./Footer";
+import { GlobalLoader } from './GlobalLoader';
 import { HeaderNav } from './HeaderNav';
 import { MenuSideBar } from "./MenuSideBar";
 import { Outlet } from "react-router-dom";
@@ -21,6 +22,7 @@ export const MainLayout = () => {
         {/* Footer */}
         <Footer />
       </div>
+      {/* <GlobalLoader /> */}
     </div>
   );
 };
