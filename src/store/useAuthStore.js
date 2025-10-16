@@ -64,7 +64,6 @@
 
 //   setUser: (user) => set({ user }),
 //   setToken: (token) => set({ token }),
- 
 
 //   // 🔐 Iniciar sesión
 //   loginService: async (correo, password) => {
@@ -87,8 +86,8 @@
 //     try {
 //       const token = localStorage.getItem('token');
 //       if (token) {
-//         await api.post('/auth/logout', {}, { 
-//           headers: { Authorization: `Bearer ${token}` } 
+//         await api.post('/auth/logout', {}, {
+//           headers: { Authorization: `Bearer ${token}` }
 //         });
 //       }
 
@@ -128,6 +127,9 @@ export const useAuthStore = create((set) => ({
       // Guardar token y rol en localStorage
       localStorage.setItem('token', data.token);
       localStorage.setItem('rol', data.role);
+      localStorage.setItem('userId', data.userId);
+      localStorage.setItem('user', JSON.stringify(data.user));
+
       if (data.estudianteId) {
         localStorage.setItem('idEstudiante', data.estudianteId);
       }
@@ -183,5 +185,3 @@ export const useAuthStore = create((set) => ({
     }
   },
 }));
-
-  

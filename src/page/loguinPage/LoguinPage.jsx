@@ -10,21 +10,20 @@ const LoguinPage = () => {
   const [password, setPassword] = useState('');
   const [rememberMe, setRememberMe] = useState(false);
 
-  const {  loading, error } = useAuthStore();
+  const { loginService, loading, error } = useAuthStore();
  
 
   const navigate = useNavigate();
 
   const handleLogin = async (e) => {
-    e.preventDefault();
-
-  if (usuario === 'admin' && password === '1234') {
-    alert('Inicio de sesión exitoso');
-    navigate ('/dashboard'); // o usa navigate('/home');
-  } else {
-    alert('Usuario o contraseña incorrectos');
-  }
-};
+     e.preventDefault();
+    try {
+      await loginService(usuario, password);
+      navigate("/dashboard");
+    } catch {
+      alert("Correo o contraseña incorrectos");
+    }
+  };
 
   return (
     <div>

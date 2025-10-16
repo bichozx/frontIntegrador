@@ -1,6 +1,8 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 
 import { CreateHVStudent } from '../../component/student/CreateHVStudent';
+import { useAuthStore } from '../../store/useAuthStore';
+import { useProfileStore } from '../../store/useProfileStore';
 
 export const StudentProfile = () => {
   const [formData, setFormData] = useState({
@@ -14,69 +16,68 @@ export const StudentProfile = () => {
     observaciones: '',
   });
 
-  const [showProyectoModal, setShowProyectoModal] = useState(false);
-  const [showHabilidadModal, setShowHabilidadModal] = useState(false);
-  const [showCertificadoModal, setShowCertificadoModal] = useState(false);
+  const { noPerfilStudent, estudiantesSinPerfil, loading } = useProfileStore();
+  const { rol, estudianteId } = useAuthStore();
+  
 
-  const [proyectos, setProyectos] = useState(formData.proyectos || []);
-  const [habilidades, setHabilidades] = useState(
-    formData.habilidadesList || []
-  );
-  const [certificados, setCertificados] = useState(
-    formData.certificadosList || []
-  );
+
+
+  useEffect(() => {
+    noPerfilStudent();
+  }, [noPerfilStudent]);
+
+  useEffect(() => {
+    if (rol === 'Estudiante' && estudianteId) {
+      setFormData((prev) => ({ ...prev, estudiante: estudianteId }));
+    }
+  }, [rol, estudianteId]);
 
   const handleChange = (e) => {
     const { id, value } = e.target;
     setFormData({ ...formData, [id]: value });
   };
-
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log('Datos enviados:', formData);
-    alert('Hoja de vida creada correctamente ✅');
+
+    let dataToSend = { ...formData };
+
+    // 🔹 Si el usuario es estudiante, ya tenemos el ID en el store
+    if (rol === 'Estudiante') {
+      dataToSend.estudiante = estudianteId;
+    }
+
+    // 🔹 Si es administrador, el ID viene del selector (ya guardado en formData)
+    else if (rol === 'Administrador') {
+      if (!formData.estudiante) {
+        alert('Por favor selecciona un estudiante antes de crear el perfil');
+        return;
+      }
+    }
+
+    console.log('📤 Datos enviados al backend:', dataToSend);
+
+    try {
+      // Aquí iría la llamada al backend:
+      // await createProfile(dataToSend)
+      alert('✅ Hoja de vida creada correctamente');
+    } catch (error) {
+      console.error('❌ Error al crear perfil:', error);
+      alert('Ocurrió un error al crear la hoja de vida');
+    }
   };
 
-  // Guardar proyecto
-  const handleSaveProyecto = (proyecto) => {
-    const nuevosProyectos = [...proyectos, proyecto];
-    setProyectos(nuevosProyectos);
-    handleChange({ target: { id: 'proyectos', value: nuevosProyectos } });
-    setShowProyectoModal(false);
-  };
-
-  // Guardar habilidad
-  const handleSaveHabilidad = (habilidad) => {
-    const nuevasHabilidades = [...habilidades, habilidad];
-    setHabilidades(nuevasHabilidades);
-    handleChange({
-      target: { id: 'habilidadesList', value: nuevasHabilidades },
-    });
-    setShowHabilidadModal(false);
-  };
-
-  // Guardar certificado
-  const handleSaveCertificado = (certificado) => {
-    const nuevosCertificados = [...certificados, certificado];
-    setCertificados(nuevosCertificados);
-    handleChange({
-      target: { id: 'certificadosList', value: nuevosCertificados },
-    });
-    setShowCertificadoModal(false);
-  };
+ 
 
   return (
     <>
       <CreateHVStudent
-        formData={formData}
-        handleChange={handleChange}
         handleSubmit={handleSubmit}
-        handleSaveProyecto={handleSaveProyecto}
-        handleSaveHabilidad={handleSaveHabilidad}
-        handleSaveCertificado={handleSaveCertificado}
-        showProyectoModal={showProyectoModal}
-        showHabilidadModal={showHabilidadModal}
-        showCertificadoModal={showCertificadoModal}
+        handleChange={handleChange}
+        loading={loading}
+        formData={formData}
+        rol={rol}
+        estudiantesSinPerfil={estudiantesSinPerfil}
+       
       />
     </>
   );

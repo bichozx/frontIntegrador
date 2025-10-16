@@ -14,9 +14,9 @@ export const ProyectoModal = ({ proyecto = {}, onClose, onSave }) => {
     setFormData({ ...formData, [name]: value });
   };
 
-  const handleSubmit = (e) => {
+ const handleSubmit = (e) => {
     e.preventDefault();
-    onSave(formData);
+    onSave( formData); // 👈 este objeto lo recibe handleSaveProyecto
     onClose();
   };
 

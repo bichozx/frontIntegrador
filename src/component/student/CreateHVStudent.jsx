@@ -1,22 +1,17 @@
-import { CertificadoModal } from '../modales/certificadoModal/CertificadoModal';
+import { CertificadoModal } from '../modales/modalCertificado/CertificadoModal';
 import { HabilidadModal } from '../modales/habilidadModal/HabilidadModal';
 import { Link } from 'react-router-dom';
 import { ProyectoModal } from '../modales/proyectoModal/ProyectoModal';
 
-export const CreateHVStudent = ({ 
-  handleSubmit, 
+export const CreateHVStudent = ({
+  handleSubmit,
   handleChange,
-  handleSaveProyecto,
-  handleSaveHabilidad,
-  handleSaveCertificado,
-  showProyectoModal,
-  showHabilidadModal,
-  showCertificadoModal,
-  setShowProyectoModal,
-  setShowHabilidadModal,
-  setShowCertificadoModal,
-  formData }) => {
-  console.log('🚀 ~ CreateHVStudent ~ formData:', formData)
+  estudiantesSinPerfil,
+  loading,
+  formData,
+  rol
+}) => {
+  
 
   return (
     <div className="container-fluid">
@@ -33,25 +28,52 @@ export const CreateHVStudent = ({
       <div className="row">
         <div className="col-12 col-md-8">
           <form id="form-historial" onSubmit={handleSubmit}>
-            {/* Estudiante */}
-            <div className="form-group mb-3">
-              <label className="form-label" htmlFor="estudiante">Estudiante</label>
-              <select
-                id="estudiante"
-                className="form-control"
-                required
-                value={formData.estudiante || ''}
-                onChange={handleChange}
-              >
-                <option value="">Seleccionar Estudiante</option>
-                <option value="1">Alan Brito</option>
-                <option value="2">Zoyla Vaca</option>
-              </select>
-            </div>
+           {/* Estudiante */}
+<div className="form-group mb-3">
+  <label htmlFor="estudiante">Seleccionar estudiante</label>
+
+  {loading ? (
+    <p>Cargando estudiantes...</p>
+  ) : (
+    <>
+      {rol === 'Administrador' ? (
+        <select
+          id="estudiante"
+          className="form-control"
+          required
+          value={formData.estudiante || ''}
+          onChange={handleChange}
+        >
+          <option value="">Seleccionar Estudiante</option>
+          {estudiantesSinPerfil?.length > 0 ? (
+            estudiantesSinPerfil.map((est) => (
+              <option key={est.id} value={est.id}>
+                {est.usuario?.nombre || est.nombre}
+              </option>
+            ))
+          ) : (
+            <option disabled>No hay estudiantes sin perfil</option>
+          )}
+        </select>
+      ) : (
+        <input
+          type="text"
+          id="estudiante"
+          className="form-control"
+          value="Perfil propio (Estudiante logueado)"
+          disabled
+        />
+      )}
+    </>
+  )}
+</div>
+
 
             {/* Resumen */}
             <div className="form-group mb-3">
-              <label className="form-label" htmlFor="resumen">Resumen</label>
+              <label className="form-label" htmlFor="resumen">
+                Resumen
+              </label>
               <textarea
                 id="resumen"
                 className="form-control"
@@ -63,7 +85,9 @@ export const CreateHVStudent = ({
 
             {/* Intereses */}
             <div className="form-group mb-3">
-              <label className="form-label" htmlFor="intereses">Intereses</label>
+              <label className="form-label" htmlFor="intereses">
+                Intereses
+              </label>
               <textarea
                 id="intereses"
                 className="form-control"
@@ -75,7 +99,9 @@ export const CreateHVStudent = ({
 
             {/* Experiencia */}
             <div className="form-group mb-3">
-              <label className="form-label" htmlFor="experiencia">Experiencia</label>
+              <label className="form-label" htmlFor="experiencia">
+                Experiencia
+              </label>
               <textarea
                 id="experiencia"
                 className="form-control"
@@ -87,7 +113,9 @@ export const CreateHVStudent = ({
 
             {/* Programa */}
             <div className="form-group mb-3">
-              <label className="form-label" htmlFor="programa">Programa</label>
+              <label className="form-label" htmlFor="programa">
+                Programa
+              </label>
               <input
                 type="text"
                 id="programa"
@@ -99,7 +127,9 @@ export const CreateHVStudent = ({
 
             {/* Semestre */}
             <div className="form-group mb-3">
-              <label className="form-label" htmlFor="semestre">Semestre</label>
+              <label className="form-label" htmlFor="semestre">
+                Semestre
+              </label>
               <input
                 type="text"
                 id="semestre"
@@ -109,65 +139,10 @@ export const CreateHVStudent = ({
               />
             </div>
 
-            {/* Proyectos */}
-            {/* <div className="form-group mb-3">
-              <label className="form-label">Proyectos</label>
-              <button
-                type="button"
-                className="btn btn-sm btn-primary ms-2 mb-2"
-                onClick={() => setShowProyectoModal(true)}
-              >
-                + Agregar Proyecto
-              </button>
-              <ul className="list-group">
-                {proyectos.map((p, i) => (
-                  <li key={i} className="list-group-item">
-                    <strong>{p.titulo}</strong> - {p.descripcion}
-                  </li>
-                ))}
-              </ul>
-            </div> */}
-
-            {/* Habilidades */}
-            {/* <div className="form-group mb-3">
-              <label className="form-label">Habilidades</label>
-              <button
-                type="button"
-                className="btn btn-sm btn-primary ms-2 mb-2"
-                onClick={() => setShowHabilidadModal(true)}
-              >
-                + Agregar Habilidad
-              </button>
-              <ul className="list-group">
-                {habilidades.map((h, i) => (
-                  <li key={i} className="list-group-item">
-                    <strong>{h.nombre}</strong> - {h.nivel} ({h.tipo})
-                  </li>
-                ))}
-              </ul>
-            </div> */}
-
-            {/* Certificados */}
-            {/* <div className="form-group mb-3">
-              <label className="form-label">Certificados</label>
-              <button
-                type="button"
-                className="btn btn-sm btn-primary ms-2 mb-2"
-                onClick={() => setShowCertificadoModal(true)}
-              >
-                + Agregar Certificado
-              </button>
-              <ul className="list-group">
-                {certificados.map((c, i) => (
-                  <li key={i} className="list-group-item">
-                    <strong>{c.nombre}</strong> - {c.institucion} ({c.fecha})
-                  </li>
-                ))}
-              </ul>
-            </div> */}
+           
 
             {/* Botones */}
-            {/* <div className="d-flex gap-3">
+            <div className="d-flex gap-3">
               <button type="submit" className="btn btn-primary w-50">
                 <i className="fas fa-save me-2"></i> Crear HV
               </button>
@@ -178,20 +153,9 @@ export const CreateHVStudent = ({
               >
                 <i className="fas fa-sync me-2"></i> Actualizar HV
               </button>
-            </div> */}
+            </div>
           </form>
         </div>
-
-        {/* Modales */}
-        {showProyectoModal && (
-          <ProyectoModal onClose={() => setShowProyectoModal(false)} onSave={handleSaveProyecto} />
-        )}
-        {showHabilidadModal && (
-          <HabilidadModal onClose={() => setShowHabilidadModal(false)} onSave={handleSaveHabilidad} />
-        )}
-        {showCertificadoModal && (
-          <CertificadoModal onClose={() => setShowCertificadoModal(false)} onSave={handleSaveCertificado} />
-        )}
       </div>
     </div>
   );

@@ -8,9 +8,12 @@ import {
   FaTimes,
 } from "react-icons/fa";
 
-import { Link } from 'react-router-dom';
-import React from 'react';
-import profileImg from '../../assets/img/undraw_profile.svg';
+import { CertificadoModal } from "../modales/modalCertificado/CertificadoModal";
+import { HabilidadModal } from "../modales/habilidadModal/HabilidadModal";
+import { Link } from "react-router-dom";
+import { ProyectoModal } from "../modales/proyectoModal/ProyectoModal";
+import React from "react";
+import profileImg from "../../assets/img/undraw_profile.svg";
 
 export const ProfileStudentComplete = ({
   perfil,
@@ -18,10 +21,22 @@ export const ProfileStudentComplete = ({
   setEditMode,
   handleChange,
   handleGuardar,
+  handleSaveProyecto,
+  handleSaveHabilidad,
+  handleSaveCertificado,
+  showProyectoModal,
+  showHabilidadModal,
+  showCertificadoModal,
+  setShowProyectoModal,
+  setShowHabilidadModal,
+  setShowCertificadoModal,
+  proyectos,
+  habilidades,
+  certificados,
 }) => {
-  
   return (
     <div className="container-fluid px-4 py-4">
+      {/* Encabezado */}
       <div className="d-flex justify-content-between align-items-center mb-4">
         <h1 className="h3 text-gray-800">Perfil del Estudiante</h1>
         <Link to="/dashboard" className="btn btn-sm btn-primary shadow-sm">
@@ -36,12 +51,10 @@ export const ProfileStudentComplete = ({
             src={profileImg}
             alt="Foto de perfil"
             className="rounded-circle mr-3"
-            style={{ width: '120px', height: '120px' }}
+            style={{ width: "120px", height: "120px" }}
           />
           <div>
-            <h4 className="font-weight-bold mb-0">
-              Estudiante {perfil.nombre}
-            </h4>
+            <h4 className="font-weight-bold mb-0">{perfil.nombre}</h4>
             <p className="text-muted mb-1">{perfil.resumen}</p>
             <p className="small text-gray-600">{perfil.experiencia}</p>
           </div>
@@ -50,7 +63,7 @@ export const ProfileStudentComplete = ({
 
       {/* Información personal */}
       <div className="card shadow mb-4 p-4">
-        <div className="d-flex justify-content-between">
+        <div className="d-flex justify-content-between align-items-center">
           <h6 className="font-weight-bold text-primary mb-3">
             Información Personal
           </h6>
@@ -70,7 +83,7 @@ export const ProfileStudentComplete = ({
             <textarea
               id="resumen"
               className="form-control"
-              value={perfil.resumen || ''}
+              value={perfil.resumen || ""}
               disabled={!editMode}
               onChange={handleChange}
             />
@@ -80,7 +93,7 @@ export const ProfileStudentComplete = ({
             <textarea
               id="intereses"
               className="form-control"
-              value={perfil.intereses || ''}
+              value={perfil.intereses || ""}
               disabled={!editMode}
               onChange={handleChange}
             />
@@ -92,7 +105,7 @@ export const ProfileStudentComplete = ({
           <textarea
             id="experiencia"
             className="form-control"
-            value={perfil.experiencia || ''}
+            value={perfil.experiencia || ""}
             disabled={!editMode}
             onChange={handleChange}
           />
@@ -120,24 +133,46 @@ export const ProfileStudentComplete = ({
 
       {/* Habilidades */}
       <div className="card shadow mb-4 p-4">
-        <h6 className="font-weight-bold text-primary mb-3">
-          <FaStar className="mr-2" /> Habilidades
-        </h6>
-        <ul>
-          {perfil.habilidades?.map((h) => (
-            <li key={h.id}>{h.nombre}</li>
+        <div className="d-flex justify-content-between align-items-center mb-3">
+          <h6 className="font-weight-bold text-primary">
+            <FaStar className="mr-2" /> Habilidades
+          </h6>
+          <button
+            type="button"
+            className="btn btn-sm btn-primary"
+            onClick={() => setShowHabilidadModal(true)}
+          >
+            + Agregar Habilidad
+          </button>
+        </div>
+
+        <ul className="list-group">
+          {habilidades.map((h, i) => (
+            <li key={i} className="list-group-item">
+              <strong>{h.nombre}</strong> - {h.nivel} ({h.tipo})
+            </li>
           ))}
         </ul>
       </div>
 
       {/* Proyectos */}
       <div className="card shadow mb-4 p-4">
-        <h6 className="font-weight-bold text-primary mb-3">
-          <FaProjectDiagram className="mr-2" /> Proyectos
-        </h6>
-        <ul>
-          {perfil.proyectosDetalle?.map((p) => (
-            <li key={p.id}>
+        <div className="d-flex justify-content-between align-items-center mb-3">
+          <h6 className="font-weight-bold text-primary">
+            <FaProjectDiagram className="mr-2" /> Proyectos
+          </h6>
+          <button
+            type="button"
+            className="btn btn-sm btn-primary"
+            onClick={() => setShowProyectoModal(true)}
+          >
+            + Agregar Proyecto
+          </button>
+        </div>
+
+        <ul className="list-group">
+          {proyectos.map((p, i) => (
+            <li key={i} className="list-group-item">
               <strong>{p.titulo}</strong> – {p.descripcion}
             </li>
           ))}
@@ -146,17 +181,47 @@ export const ProfileStudentComplete = ({
 
       {/* Certificados */}
       <div className="card shadow mb-4 p-4">
-        <h6 className="font-weight-bold text-primary mb-3">
-          <FaCertificate className="mr-2" /> Certificados
-        </h6>
-        <ul>
-          {perfil.certificados?.map((c) => (
-            <li key={c.id}>
-              <strong>{c.nombre}</strong> ({c.institucion})
+        <div className="d-flex justify-content-between align-items-center mb-3">
+          <h6 className="font-weight-bold text-primary">
+            <FaCertificate className="mr-2" /> Certificados
+          </h6>
+          <button
+            type="button"
+            className="btn btn-sm btn-primary"
+            onClick={() => setShowCertificadoModal(true)}
+          >
+            + Agregar Certificado
+          </button>
+        </div>
+
+        <ul className="list-group">
+          {certificados.map((c, i) => (
+            <li key={i} className="list-group-item">
+              <strong>{c.nombre}</strong> - {c.institucion} ({c.fecha})
             </li>
           ))}
         </ul>
       </div>
+
+      {/* Modales */}
+      {showProyectoModal && (
+        <ProyectoModal
+          onClose={() => setShowProyectoModal(false)}
+          onSave={handleSaveProyecto}
+        />
+      )}
+      {showHabilidadModal && (
+        <HabilidadModal
+          onClose={() => setShowHabilidadModal(false)}
+          onSave={handleSaveHabilidad}
+        />
+      )}
+      {showCertificadoModal && (
+        <CertificadoModal
+          onClose={() => setShowCertificadoModal(false)}
+          onSave={handleSaveCertificado}
+        />
+      )}
     </div>
   );
 };
